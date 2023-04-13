@@ -2,7 +2,7 @@ package Clicker;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.*;
+import java.util.Scanner;
 
 public class AutoClicker implements Runnable {
     private Robot robot;
@@ -35,7 +35,19 @@ public class AutoClicker implements Runnable {
     }
 
     public static void main(String[] args) throws AWTException {
-        AutoClicker clicker = new AutoClicker(new Color(255, 87, 34), 0, 10);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el valor de R del color objetivo (0-255): ");
+        int r = scanner.nextInt();
+        System.out.print("Ingrese el valor de G del color objetivo (0-255): ");
+        int g = scanner.nextInt();
+        System.out.print("Ingrese el valor de B del color objetivo (0-255): ");
+        int b = scanner.nextInt();
+        System.out.print("Ingrese la cantidad de tolerancia (0-255): ");
+        int tolerance = scanner.nextInt();
+        System.out.print("Ingrese el delay entre clicks (en milisegundos): ");
+        int delay = scanner.nextInt();
+        Color targetColor = new Color(r, g, b);
+        AutoClicker clicker = new AutoClicker(targetColor, delay, tolerance);
         Thread t = new Thread(clicker);
         t.start();
     }
